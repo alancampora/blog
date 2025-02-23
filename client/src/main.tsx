@@ -9,6 +9,7 @@ import { AuthProvider } from "./context/auth.tsx";
 import Landing from "./pages/landing/index.tsx";
 import Profile from "./pages/profile/index.tsx";
 import ProtectedRoute from "./components/protected-route.tsx";
+import NewPost from "./pages/posts/new/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,14 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Singup />,
+  },
+{
+    path: "/posts/new",
+    element: (
+      <ProtectedRoute>
+        <NewPost />
+      </ProtectedRoute>
+    ),
   },
 ]);
 
