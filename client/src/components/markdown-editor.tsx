@@ -1,6 +1,8 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import {
   MDXEditor,
+  MDXEditorMethods,
   headingsPlugin,
   listsPlugin,
   quotePlugin,
@@ -20,6 +22,7 @@ import {
   UndoRedo
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
+import { Label } from "./ui/label";
 
 // 🟢 Define Sandpack configuration
 const sandpackConfig: SandpackConfig = {
@@ -68,34 +71,41 @@ const plugins = [
 
 type Props = {
   onChangeText: (markdown: string) => void;
+  value: string;
 }
 
-function MarkdownEditor({ onChangeText }: Props) {
-  const [markdown, setMarkdown] = useState("## Welcome to MDX Editor 🚀");
+function MarkdownEditor({ onChangeText, value }: Props) {
+  const [markdown, setMarkdown] = useState("default value");
+  const ref = React.useRef<MDXEditorMethods>(null)
 
   useEffect(() => {
-    console.log("Markdown content:", markdown);
-  }, [markdown]);
+    ref.current?.setMarkdown(value);
+  }, [value]);
 
-  const handleOnChange = (newText:string) => {
+
+  const handleOnChange = (newText: string) => {
     setMarkdown(newText);
     onChangeText(newText);
   }
 
   return (
-    <div className="p-4 max-w-3xl mx-auto bg-white border-2 border-border">
-      <h1 className="text-xl font-bold mb-4">MDX Editor</h1>
-      <MDXEditor
-        markdown={markdown}
-        onChange={setMarkdown} // Sync state
-        autoFocus
-        className="bg-grey-100 border rounded-lg shadow-sm p-2"
-        plugins={plugins} // 🟢 Ensure the toolbar is used
-      />
-      <h2 className="text-lg font-semibold mt-4">Output:</h2>
-      <pre className="bg-gray-100 p-2 rounded">{markdown}</pre>
+    <div className="max-w-3xl mx-auto">
+      <Label className="uppercase" htmlFor="title">Mdx Editor</Label>
+      <div className="p-4 bg-white border-2 border-border rounded">
+        <MDXEditor
+          ref={ref}
+          markdown={markdown}
+          onChange={handleOnChange} // Sync state
+          autoFocus
+          className="bg-grey-100 border rounded-lg shadow-sm p-2"
+          plugins={plugins} // 🟢 Ensure the toolbar is used
+        />
+        <h2 className="text-lg font-semibold mt-4">Output:</h2>
+        <pre className="bg-gray-100 p-2 rounded">{markdown}</pre>
+      </div>
     </div>
   );
 }
 
 export default MarkdownEditor;
+

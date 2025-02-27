@@ -7,6 +7,7 @@ import businessObjectRoutes from "./routes/BusinessObject";
 import authRoutes from "./routes/Auth";
 import loginRoutes from "./routes/Login";
 import userRoutes from "./routes/User";
+import postsRoutes from "./bos/posts/posts.routes";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use("/business-objects", businessObjectRoutes);
 app.use("/auth", authRoutes);
 app.use("/login", loginRoutes);
 app.use("/users", userRoutes);
+app.use("/api/posts", postsRoutes);
 
 app.listen(PORT, () => {
   const connectionString =

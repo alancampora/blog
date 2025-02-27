@@ -40,8 +40,8 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Singup />,
   },
-{
-    path: "/posts/new",
+  {
+    path: "/posts/:postId",
     element: (
       <ProtectedRoute>
         <NewPost />
