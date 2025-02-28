@@ -32,7 +32,7 @@ export default function Home({}: Props) {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/posts`,
+        `${import.meta.env.VITE_API_URL}/api/posts/user`,
         {
           credentials: "include",
         }

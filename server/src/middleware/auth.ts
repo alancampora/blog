@@ -17,21 +17,23 @@ export const authenticateToken = async (
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
       id: string;
     };
+
     const user = await User.findById(decoded.id);
 
     if (!user) {
       return res.status(401).json({ message: "Invalid authentication token" });
     }
 
-    // Attach user to the request object for later use
     (req as any).user = {
       username: user.username,
       email: user.email,
       id: user._id,
       description: user?.description,
     };
-    console.log({ user });
+
+    console.log({ user: user.toString() });
     next();
+
   } catch (error) {
     return res.status(403).json({ message: "Invalid or expired token" });
   }
