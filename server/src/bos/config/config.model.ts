@@ -14,4 +14,4 @@ const ConfigSchema: Schema = new Schema({
   // Define other fields here
 });
 
-export const Config = mongoose.model<IConfig>('Config', ConfigSchema);
+export default mongoose.model<IConfig>('Config', ConfigSchema);

@@ -57,6 +57,7 @@ export const getPostById = async (req: Request, res: Response): Promise<void> =>
 // Actualizar un post
 export const updatePost = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
+    console.log('req.body, va a hacer el update', req.body); 
     const { title, content, published } = req.body;
     const post = await Post.findById(req.params.id);
 
@@ -74,7 +75,7 @@ export const updatePost = async (req: AuthRequest, res: Response): Promise<void>
 
     post.title = title || post.title;
     post.content = content || post.content;
-    post.published = published || post.published;
+    post.published = published;
 
     await post.save();
     res.json(post);

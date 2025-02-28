@@ -11,6 +11,7 @@ import Landing from "./pages/landing/index.tsx";
 import Profile from "./pages/profile/index.tsx";
 import ProtectedRoute from "./components/protected-route.tsx";
 import NewPost from "./pages/posts/new/index.tsx";
+import UserBlog from "./runtime-pages/user-blog/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,12 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <NewPost />
       </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/:blogId",
+    element: (
+      <UserBlog />
     ),
   },
 ]);

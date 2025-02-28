@@ -61,7 +61,7 @@ export default function Post({ }: Props) {
         body: JSON.stringify({ title, content: markdown, published }),
       });
 
-      const data = await response.json();
+      await response.json();
 
       toast({
         title: "Post saved",

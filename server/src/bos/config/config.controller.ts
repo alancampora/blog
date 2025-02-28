@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Config } from './config.model';
+import Config from './config.model';
 import { IUser } from '@common/User';
 
 interface AuthRequest extends Request {
