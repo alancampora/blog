@@ -3,7 +3,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
+import { Toaster } from '@/components/ui/toaster';
 import UserLayout from '@/components/user-layout';
+import { useToast } from '@/hooks/use-toast';
 import { useState, useEffect } from 'react';
 
 interface Props {
@@ -13,7 +15,7 @@ export default function BlogConfig({ }: Props) {
   const [blogName, setBlogName] = useState("choose-a-name");
   const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
-
+  const { toast } = useToast();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -58,17 +60,27 @@ export default function BlogConfig({ }: Props) {
         throw new Error('Failed to update blog');
       }
 
-      const result = await response.json();
-      console.log('Update successful:', result);
+      await response.json();
+
+      toast({
+        className: "bg-green-200",
+        title: "Config updated",
+        description: "Your blog has been updated successfully",
+      });
 
     } catch (error) {
-      console.error('Error updating blog:', error);
+      toast({
+        className: "bg-red-200",
+        title: "Error updating blog",
+        description: "Your blog has not been updated",
+      });
     }
   };
 
   return (
 
     <UserLayout title={`Setup your blog config`}>
+      <Toaster />
       <Card className="bg-bs">
         <CardContent>
           <div className="my-4">
