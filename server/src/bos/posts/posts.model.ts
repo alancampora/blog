@@ -6,6 +6,7 @@ export interface IPost extends Document {
   userId: mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
+  published: boolean;
 }
 
 const PostSchema: Schema = new Schema(
@@ -13,6 +14,7 @@ const PostSchema: Schema = new Schema(
     title: { type: String, required: true, trim: true },
     content: { type: String, required: true },
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    published: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

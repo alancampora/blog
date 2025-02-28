@@ -2,6 +2,7 @@ import MarkdownEditor from "@/components/markdown-editor";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { Toaster } from "@/components/ui/toaster";
 import UserLayout from "@/components/user-layout";
 import { useAuth } from "@/context/auth";
@@ -21,6 +22,7 @@ export default function Post({ }: Props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [markdown, setMarkdown] = useState("");
+  const [published, setPublished] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast()
@@ -36,6 +38,7 @@ export default function Post({ }: Props) {
         const data = await response.json();
         setContent(data.content);
         setTitle(data.title);
+        setPublished(data.published);
         console.log({ data });
       } catch (error) {
         console.error(error);
@@ -55,10 +58,11 @@ export default function Post({ }: Props) {
           'Content-Type': 'application/json',
         },
         credentials: "include", // Ensures the cookie is sent!
-        body: JSON.stringify({ title, content: markdown }),
+        body: JSON.stringify({ title, content: markdown, published }),
       });
 
       const data = await response.json();
+
       toast({
         title: "Post saved",
         description: "Your post has been saved successfully",
@@ -77,6 +81,10 @@ export default function Post({ }: Props) {
             <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
           </div>
           <MarkdownEditor onChangeText={setMarkdown} value={content} />
+          <div className="py-4 flex flex-row items-center space-x-2">
+            <Label className="uppercase" htmlFor="published">Published</Label>
+          <Switch id="published" checked={published} onCheckedChange={() => setPublished(!published)} />
+          </div>
           <div className="py-4">
             <Button onClick={handleSave}>Save</Button>
           </div>
