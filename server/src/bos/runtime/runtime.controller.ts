@@ -23,9 +23,10 @@ export const getPostsByBlogName = async (req: Request, res: Response): Promise<v
     const userId = config.userId;
 
     // Get all published posts for the user
-    const posts = await Post.find({ userId, published: true }).populate("userId", "username email");
+    const posts = await Post.find({ userId, published: true })
+      .populate("userId", "username email");
 
-    res.json(posts);
+    res.json({ posts, config });
   } catch (error) {
     res.status(500).json({ message: "Error al obtener los posts del usuario", error });
   }

@@ -12,7 +12,7 @@ import Profile from "./pages/profile/index.tsx";
 import ProtectedRoute from "./components/protected-route.tsx";
 import NewPost from "./pages/posts/new/index.tsx";
 import UserBlog from "./runtime-pages/user-blog/index.tsx";
-
+import RuntimePost from "./runtime-pages/post/index.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -64,6 +64,13 @@ const router = createBrowserRouter([
       <UserBlog />
     ),
   },
+  {
+    path: "/:blogId/:postId",
+    element: (
+      <RuntimePost />
+    ),
+  },
+
 ]);
 
 createRoot(document.getElementById("root")!).render(
