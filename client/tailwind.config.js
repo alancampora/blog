@@ -9,6 +9,7 @@ export default {
         overlay: 'var(--overlay)',
         bg: 'var(--bg)',
         bw: 'var(--bw)',
+        bs: 'var(--bs)',
         blank: 'var(--blank)',
         text: 'var(--text)',
         mtext: 'var(--mtext)',

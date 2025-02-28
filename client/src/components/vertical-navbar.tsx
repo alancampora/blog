@@ -12,6 +12,7 @@ import { Skeleton } from "./ui/skeleton";
 import ProfileIcon from "./icons/profile";
 import ShutDownIcon from "./icons/shut-down";
 import { useAuth } from "@/context/auth";
+import UserIcon from "./icons/user";
 
 const navItems = [
   {
@@ -23,6 +24,12 @@ const navItems = [
     icon: ProfileIcon,
     label: "Profile",
     link: "/profile",
+    onClick: null,
+  },
+  {
+    icon: UserIcon,
+    label: "Config",
+    link: "/config",
     onClick: null,
   },
   {

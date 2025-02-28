@@ -46,8 +46,8 @@ const ProfilePage: React.FC = () => {
   };
 
   return (
-    <UserLayout title="Edit your user profile settings bg-bg">
-      <Card className="max-w-xl mx-auto p-4">
+    <UserLayout title="Edit your user profile settings">
+      <Card className="max-w-xl mx-auto p-4 bg-bs">
         <form onSubmit={handleSubmit} className="space-y-6">
           <Field
             id="username"

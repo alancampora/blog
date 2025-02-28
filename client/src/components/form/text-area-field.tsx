@@ -22,7 +22,7 @@ export default function TextareaField({
 }: Props) {
   return (
     <div>
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+      <label htmlFor={name} className="block text-lg font-bold text-gray-700">
         {label}
       </label>
       <Textarea

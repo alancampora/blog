@@ -18,9 +18,12 @@ export const updateOrCreateConfig = async (req: AuthRequest, res: Response): Pro
   console.log('updateOrCreateConfig', req.body);
 
   try {
-    let isBlogNameTaken = await Config.findOne({ blogName });
+    let blogNameTakenByUser = await Config.findOne({ blogName });
 
-    if (isBlogNameTaken) {
+    console.log('blogNameTakenByUser', blogNameTakenByUser);
+    console.log('userId', userId);
+
+    if (blogNameTakenByUser && blogNameTakenByUser.userId.toString() !== userId.toString()) {
       return res.status(400).json({ message: 'Blog name already taken' });
     }
 

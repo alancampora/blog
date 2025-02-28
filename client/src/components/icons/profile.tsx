@@ -7,6 +7,7 @@ export default function ProfileIcon({ className }: Props) {
       className={className}
       viewBox="0 0 48 48"
     >
+
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="48"

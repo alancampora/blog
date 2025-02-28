@@ -69,7 +69,7 @@ export default function BlogConfig({ }: Props) {
   return (
 
     <UserLayout title={`Setup your blog config`}>
-      <Card className="bg--bs">
+      <Card className="bg-bs">
         <CardContent>
           <div className="my-4">
             <Label htmlFor="blogName">BLOG NAME</Label>

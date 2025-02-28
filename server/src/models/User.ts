@@ -10,7 +10,6 @@ const UserSchema: Schema = new Schema({
   password: { type: String }, // Hashed password
   username: { type: String, required: true },
   description: { type: String, required: false },
-  blogName: { type: String, required: false },
   googleId: { type: String }, // Used for Google authentication
 });
 
