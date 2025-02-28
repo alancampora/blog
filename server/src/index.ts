@@ -8,7 +8,7 @@ import authRoutes from "./routes/Auth";
 import loginRoutes from "./routes/Login";
 import userRoutes from "./routes/User";
 import postsRoutes from "./bos/posts/posts.routes";
-
+import configRoutes from "./bos/config/config.routes";
 dotenv.config();
 
 const app = express();
@@ -29,6 +29,7 @@ app.use("/auth", authRoutes);
 app.use("/login", loginRoutes);
 app.use("/users", userRoutes);
 app.use("/api/posts", postsRoutes);
+app.use("/config", configRoutes);
 
 app.listen(PORT, () => {
   const connectionString =

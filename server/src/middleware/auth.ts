@@ -7,6 +7,8 @@ export const authenticateToken = async (
   res: any,
   next: NextFunction,
 ): Promise<void> => {
+  console.log('authenticateToken', req.cookies);
+
   const token = req.cookies.auth_token;
 
   if (!token) {

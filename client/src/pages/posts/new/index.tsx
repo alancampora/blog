@@ -2,8 +2,10 @@ import MarkdownEditor from "@/components/markdown-editor";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Toaster } from "@/components/ui/toaster";
 import UserLayout from "@/components/user-layout";
 import { useAuth } from "@/context/auth";
+import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -21,6 +23,8 @@ export default function Post({ }: Props) {
   const [markdown, setMarkdown] = useState("");
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { toast } = useToast()
+
 
 
   useEffect(() => {
@@ -55,7 +59,10 @@ export default function Post({ }: Props) {
       });
 
       const data = await response.json();
-      console.log('Post saved:', data);
+      toast({
+        title: "Post saved",
+        description: "Your post has been saved successfully",
+      })
     } catch (error) {
       console.error('Error saving post:', error);
     }
@@ -63,16 +70,17 @@ export default function Post({ }: Props) {
 
   return (
     <UserLayout title={`New Post`}>
-      <div className="mx-auto max-w-3xl">
-        <div className="py-4 flex flex-col items-left space-y-2 mx-auto max-w-3xl">
-          <Label className="uppercase" htmlFor="title">Title</Label>
-          <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+      <Toaster />
+        <div className="mx-auto max-w-3xl">
+          <div className="py-4 flex flex-col items-left space-y-2 mx-auto max-w-3xl">
+            <Label className="uppercase" htmlFor="title">Title</Label>
+            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+          </div>
+          <MarkdownEditor onChangeText={setMarkdown} value={content} />
+          <div className="py-4">
+            <Button onClick={handleSave}>Save</Button>
+          </div>
         </div>
-        <MarkdownEditor onChangeText={setMarkdown} value={content} />
-        <div className="py-4">
-          <Button onClick={handleSave}>Save</Button>
-        </div>
-      </div>
     </UserLayout>
   );
 }

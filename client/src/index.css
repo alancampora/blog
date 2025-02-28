@@ -42,6 +42,7 @@ body {
 
   --bg: #FEF2E8;
   --bw: #fff; /* white and secondary black e.g. utility class variant would be: bg-[#fff] dark:bg-[#212121] */
+  --bs: #e5b9ff; /* white and secondary black e.g. utility class variant would be: bg-[#fff] dark:bg-[#212121] */
   --blank: #000; /* blank black and white */
   --border: #000;
   --text: #000;
@@ -73,15 +74,3 @@ body {
   --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
 }
 
-
-
-@layer base {}
-
-
-
-@layer base {
-  * {
-  }
-  body {
-  }
-}

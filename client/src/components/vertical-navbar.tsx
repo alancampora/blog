@@ -46,7 +46,7 @@ const VerticalNavbar = ({ isLoading }: VerticalNavbarProps) => {
   const auth = useAuth();
 
   return (
-    <div className="w-20 sm:w-48 p-2 bg-white border-r border-r-2 border-border">
+    <div className="w-20 sm:w-48 p-2 bg-white">
       <div className="w-full justify-center flex flex-row space-x-2 items-center mb-6">
         <SquareChevronRight className="w-8 h-8" />
         <h1 className="hidden sm:inline text-lg">Codeteca</h1>

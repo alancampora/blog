@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/home/index.tsx";
+import Config from "./pages/config/index.tsx";
 import Login from "./pages/login/index.tsx";
 import Singup from "./pages/singup/index.tsx";
 import { AuthProvider } from "./context/auth.tsx";
@@ -21,6 +22,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Home />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/config",
+    element: (
+      <ProtectedRoute>
+        <Config />
       </ProtectedRoute>
     ),
   },
