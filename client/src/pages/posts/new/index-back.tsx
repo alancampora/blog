@@ -1,26 +1,34 @@
-import { Toaster } from "@/components/ui/toaster";
-import UserLayout from "@/components/user-layout";
-import { useToast } from "@/hooks/use-toast";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Input } from "@/components/ui/input";
 import MarkdownEditor from "@/components/markdown-editor";
 import { Button } from "@/components/ui/button";
-import ReactMarkdown from "react-markdown";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { Toaster } from "@/components/ui/toaster";
+import UserLayout from "@/components/user-layout";
+import { useAuth } from "@/context/auth";
+import { useToast } from "@/hooks/use-toast";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 type Props = {};
 
+type Post = {
+  title: string;
+  content: string;
+}
+
 export default function Post({ }: Props) {
   const { postId } = useParams();
-  const [markdown, setMarkdown] = useState("");
-  const { toast } = useToast()
   const [title, setTitle] = useState("");
-  const [subtitle, setSubtitle] = useState("");
   const [content, setContent] = useState("");
+  const [markdown, setMarkdown] = useState("");
   const [published, setPublished] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const { toast } = useToast()
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +49,8 @@ export default function Post({ }: Props) {
 
     fetchData();
   }, [postId]);
+
+  useEffect(() => { console.log(markdown) }, [markdown])
 
   const handleSave = async () => {
     try {
@@ -65,38 +75,28 @@ export default function Post({ }: Props) {
   };
 
   return (
-    <UserLayout classNameContent="bg-white" title={`New Post`} hideHeader>
+    <UserLayout title={`New Post`} hideHeader>
       <Toaster />
-      <div className="p-4 max-w-3xl mx-auto space-y-4">
-        <Input
-          className="text-4xl font-bold border-none focus:ring-0"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <Input
-          className="text-lg text-gray-500 border-none focus:ring-0"
-          placeholder="Add a subtitle..."
-          value={subtitle}
-          onChange={(e) => setSubtitle(e.target.value)}
-        />
-        <div className="py-2 flex flex-row items-center space-x-2">
-          <Switch id="published" checked={published} onCheckedChange={() => setPublished(!published)} />
-          <Label className="uppercase" htmlFor="published">Published</Label>
+      {false && <div className="mx-auto max-w-4xl">
+        <div className="py-4 flex flex-col items-left space-y-2 mx-auto max-w-4xl">
+          <Label className="uppercase" htmlFor="title">Title</Label>
+          <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
-
+        <div className="py-4 flex flex-col items-left space-y-2 mx-auto max-w-4xl">
+          <Label className="uppercase" htmlFor="title">Image Url</Label>
+          <Input id="title" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+        </div>
         <MarkdownEditor onChangeText={setMarkdown} value={content} />
-
-        <div className="p-4 border rounded-lg bg-gray-50 overflow-auto">
-          <h3 className="font-bold">Preview</h3>
-          <ReactMarkdown>{markdown}</ReactMarkdown>
+        <div className="py-4 flex flex-row items-center space-x-2">
+          <Label className="uppercase" htmlFor="published">Published</Label>
+          <Switch id="published" checked={published} onCheckedChange={() => setPublished(!published)} />
         </div>
-
         <div className="py-4">
           <Button onClick={handleSave}>Save</Button>
         </div>
-
-      </div>
+      </div>}
+      <Input className="bg-white border-none" id="title" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+      <MarkdownEditor onChangeText={setMarkdown} value={content} />
     </UserLayout>
   );
 }

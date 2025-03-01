@@ -89,9 +89,8 @@ function MarkdownEditor({ onChangeText, value }: Props) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <Label className="uppercase" htmlFor="title">Mdx Editor</Label>
-      <div className="p-4 bg-white border-2 border-border rounded">
+    <div className="mx-auto">
+      <div className="">
         <MDXEditor
           ref={ref}
           markdown={markdown}
@@ -100,8 +99,6 @@ function MarkdownEditor({ onChangeText, value }: Props) {
           className="bg-grey-100 border rounded-lg shadow-sm p-2"
           plugins={plugins} // 🟢 Ensure the toolbar is used
         />
-        <h2 className="text-lg font-semibold mt-4">Output:</h2>
-        <pre className="bg-gray-100 p-2 rounded">{markdown}</pre>
       </div>
     </div>
   );

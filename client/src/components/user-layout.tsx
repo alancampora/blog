@@ -8,14 +8,15 @@ type Props = {
   subtitle?: string;
   children: React.ReactNode;
   hideHeader?: boolean;
+  classNameContent?: string;
 };
 
-export default function UserLayout({ title, subtitle, children, hideHeader = false }: Props) {
+export default function UserLayout({ title, subtitle, children, hideHeader = false, classNameContent = "" }: Props) {
 
   const { user, loading } = useAuth();
 
   return (
-    <div className="flex flex-row h-full">
+    <div className={`flex flex-row h-full`}>
       <VerticalNavbar isLoading={loading} />
 
       {user && (
@@ -31,7 +32,7 @@ export default function UserLayout({ title, subtitle, children, hideHeader = fal
             </header>
           )}
 
-          <section className="p-4 h-dvh bg-bg">{children}</section>
+          <section className={`p-4 h-dvh bg-bg ${classNameContent}`}>{children}</section>
         </main>
       )}
     </div>
