@@ -13,7 +13,7 @@ export const updateOrCreateConfig = async (req: AuthRequest, res: Response): Pro
 
   const { id } = req.params;
   const { blogName, active } = req.body;
-  const userId = (req as any).user.id;
+  const userId = req.user?._id;
 
   console.log('updateOrCreateConfig', req.body);
 
@@ -24,7 +24,8 @@ export const updateOrCreateConfig = async (req: AuthRequest, res: Response): Pro
     console.log('userId', userId);
 
     if (blogNameTakenByUser && blogNameTakenByUser.userId.toString() !== userId.toString()) {
-      return res.status(400).json({ message: 'Blog name already taken' });
+      res.status(400).json({ message: 'Blog name already taken' });
+      return;
     }
 
     let config = await Config.findOneAndUpdate(
@@ -58,13 +59,14 @@ export const updateOrCreateConfig = async (req: AuthRequest, res: Response): Pro
 };
 
 export const getConfig = async (req: AuthRequest, res: Response): Promise<void> => {
-  const userId = (req as any).user.id;
+  const userId = req.user?._id;
 
   try {
     const config = await Config.findOne({ userId });
 
     if (!config) {
-      return res.status(404).json({ message: 'Config not found' });
+      res.status(404).json({ message: 'Config not found' });
+      return;
     }
 
     res.json(config);

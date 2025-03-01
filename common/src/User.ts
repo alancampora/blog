@@ -3,4 +3,6 @@ export type IUser = {
   password?: string;
   username: string;
   googleId?: string;
+  _id: string;
+  description?: string;
 };

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import Post, { IPost } from "./posts.model";
+import { IPost } from "@common/Post";
 import { IUser } from "@common/User";
+import Post from "./posts.model";
 import mongoose from "mongoose";
 
 // Tipo extendido para la request con usuario autenticado
@@ -12,7 +13,7 @@ interface AuthRequest extends Request {
 export const createPost = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const { title, content, published, imageUrl } = req.body;
-    const userId = req.user?.id; // Ahora `req.user` viene del middleware `authenticateToken`
+    const userId = req.user?._id; // Ahora `req.user` viene del middleware `authenticateToken`
 
     if (!title || !content) {
       res.status(400).json({ message: "Título y contenido son obligatorios" });
@@ -68,7 +69,7 @@ export const updatePost = async (req: AuthRequest, res: Response): Promise<void>
 
     console.log({ post, user: req.user });
 
-    if (post.userId.toString() !== req.user?.id.toString()) {
+    if (post.userId.toString() !== req.user?._id.toString()) {
       res.status(403).json({ message: "No tienes permiso para actualizar este post" });
       return;
     }
@@ -96,7 +97,7 @@ export const deletePost = async (req: AuthRequest, res: Response): Promise<void>
       return;
     }
 
-    if (post.userId.toString() !== req.user?.id) {
+    if (post.userId.toString() !== req.user?._id.toString()) {
       res.status(403).json({ message: "No tienes permiso para eliminar este post" });
       return;
     }
@@ -113,7 +114,7 @@ export const getPostsByUser = async (req: AuthRequest, res: Response): Promise<v
   try {
     console.log('req.user', req.user);
 
-    const userId = req.user?.id;
+    const userId = req.user?._id;
 
     console.log('este es el userId' , { userId });
 

@@ -1,7 +1,5 @@
-import RocketIcon from "@/components/icons/rocket";
 import { Button } from "@/components/ui/button";
 import UserLayout from "@/components/user-layout";
-import VerticalNavbar from "@/components/vertical-navbar";
 import { useAuth } from "@/context/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -89,10 +87,6 @@ export default function Home({}: Props) {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleNewPost = () => {
-    navigate("/posts/new"); // Replace '/target-path' with your desired route
   };
 
   return (
