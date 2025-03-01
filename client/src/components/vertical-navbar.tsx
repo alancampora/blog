@@ -21,13 +21,13 @@ const navItems = [
     link: "/home",
   },
   {
-    icon: ProfileIcon,
+    icon: UserIcon,
     label: "Profile",
     link: "/profile",
     onClick: null,
   },
   {
-    icon: UserIcon,
+    icon: ProfileIcon,
     label: "Config",
     link: "/config",
     onClick: null,
@@ -53,29 +53,19 @@ const VerticalNavbar = ({ isLoading }: VerticalNavbarProps) => {
   const auth = useAuth();
 
   return (
-    <div className="w-20 sm:w-48 p-2 bg-bs">
-      <div className="w-full justify-center flex flex-row space-x-2 items-center mb-6">
-        <SquareChevronRight className="w-8 h-8" />
-        <h1 className="hidden sm:inline text-lg">Codeteca</h1>
-      </div>
-
-      {navItems.map((item) => {
-        return isLoading ? (
-          <Skeleton className="w-full h-[20px] mb-4" />
-        ) : (
-          <Link to={item?.link}>
-            <button
-              className="w-full justify-center p-2 flex flex-row items-center space-x-2 transition-colors duration-200 bg-bs hover:bg-gray-50 hover:text-black mb-4"
-              onClick={() => item.onClick && item?.onClick(auth, navigate)}
-            >
-              <item.icon className="w-8 h-8" />
-              <span className="hidden sm:inline text-lg">{item.label}</span>
-            </button>
-          </Link>
-        );
-      })}
+    <div className="w-20 p-2 bg-bs flex flex-col justify-center items-center">
+      {navItems.map((item) => (
+        <Link to={item?.link}>
+          <button
+            className="w-full justify-center p-2 flex flex-row items-center space-x-2 transition-colors duration-200 bg-bs hover:bg-gray-50 hover:text-black mb-4"
+            onClick={() => item.onClick && item?.onClick(auth, navigate)}
+          >
+            <item.icon className="w-8 h-8" />
+          </button>
+        </Link>
+      ))}
     </div>
-  );
+  )
 };
 
 export default VerticalNavbar;
