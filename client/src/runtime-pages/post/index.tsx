@@ -37,7 +37,7 @@ const PostComponent = () => {
             h1: ({ children }) => <h1 className="text-3xl font-bold my-2">{children}</h1>,
             h2: ({ children }) => <h2 className="text-2xl font-semibold my-2">{children}</h2>,
             h3: ({ children }) => <h2 className="text-xl font-semibold my-2">{children}</h2>,
-            p: ({ children }) => <p className="text-gray-700 dark:text-gray-300">{children}</p>,
+            p: ({ children }) => <p className="text-gray-700 dark:text-gray-300 mb-2">{children}</p>,
             ul: ({ children }) => <ul className="list-disc list-inside">{children}</ul>,
             ol: ({ children }) => <ol className="list-decimal list-inside">{children}</ol>,
             li: ({ children }) => <li className="ml-4">{children}</li>,

@@ -11,7 +11,7 @@ interface AuthRequest extends Request {
 // Crear un nuevo post
 export const createPost = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const { title, content, published } = req.body;
+    const { title, content, published, imageUrl } = req.body;
     const userId = req.user?.id; // Ahora `req.user` viene del middleware `authenticateToken`
 
     if (!title || !content) {
@@ -19,7 +19,7 @@ export const createPost = async (req: AuthRequest, res: Response): Promise<void>
       return;
     }
 
-    const newPost: IPost = new Post({ title, content, userId, published });
+    const newPost: IPost = new Post({ title, content, userId, published, imageUrl });
     await newPost.save();
 
     res.status(201).json(newPost);
@@ -58,7 +58,7 @@ export const getPostById = async (req: Request, res: Response): Promise<void> =>
 export const updatePost = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     console.log('req.body, va a hacer el update', req.body); 
-    const { title, content, published } = req.body;
+    const { title, content, published, imageUrl } = req.body;
     const post = await Post.findById(req.params.id);
 
     if (!post) {
@@ -76,6 +76,7 @@ export const updatePost = async (req: AuthRequest, res: Response): Promise<void>
     post.title = title || post.title;
     post.content = content || post.content;
     post.published = published;
+    post.imageUrl = imageUrl || post.imageUrl;
 
     await post.save();
     res.json(post);

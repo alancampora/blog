@@ -19,7 +19,7 @@ export default function UserLayout({ title, subtitle, children }: Props) {
   };
 
   return (
-    <div className="flex flex-row h-dvh">
+    <div className="flex flex-row h-full">
       <VerticalNavbar isLoading={loading} />
 
       {user && (

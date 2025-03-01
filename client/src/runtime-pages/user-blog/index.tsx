@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Card, CardTitle } from "@/components/ui/card";
 import CardV2 from "@/components/ui/card-v2";
 
 type Props = {};
@@ -30,7 +29,7 @@ export default function UserBlog({ }: Props) {
           {posts.map((post, index) => (
             <li key={index}>
               <Link to={`/${blogId}/${post._id}`}>
-                <CardV2 title={post.title} content={post.content} />
+                <CardV2 imageUrl={post?.imageUrl} title={post?.title} content={post?.content} />
               </Link>
             </li>
           ))}

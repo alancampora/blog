@@ -89,7 +89,7 @@ function MarkdownEditor({ onChangeText, value }: Props) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="max-w-4xl mx-auto">
       <Label className="uppercase" htmlFor="title">Mdx Editor</Label>
       <div className="p-4 bg-white border-2 border-border rounded">
         <MDXEditor

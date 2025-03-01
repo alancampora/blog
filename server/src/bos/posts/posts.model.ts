@@ -7,6 +7,7 @@ export interface IPost extends Document {
   createdAt: Date;
   updatedAt: Date;
   published: boolean;
+  imageUrl?: string;
 }
 
 const PostSchema: Schema = new Schema(
@@ -15,6 +16,7 @@ const PostSchema: Schema = new Schema(
     content: { type: String, required: true },
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     published: { type: Boolean, default: false },
+    imageUrl: { type: String, required: false },
   },
   { timestamps: true }
 );

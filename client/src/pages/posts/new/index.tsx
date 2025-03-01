@@ -23,6 +23,7 @@ export default function Post({ }: Props) {
   const [content, setContent] = useState("");
   const [markdown, setMarkdown] = useState("");
   const [published, setPublished] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast()
@@ -39,6 +40,7 @@ export default function Post({ }: Props) {
         setContent(data.content);
         setTitle(data.title);
         setPublished(data.published);
+        setImageUrl(data.imageUrl);
         console.log({ data });
       } catch (error) {
         console.error(error);
@@ -58,7 +60,7 @@ export default function Post({ }: Props) {
           'Content-Type': 'application/json',
         },
         credentials: "include", // Ensures the cookie is sent!
-        body: JSON.stringify({ title, content: markdown, published }),
+        body: JSON.stringify({ title, content: markdown, published, imageUrl }),
       });
 
       await response.json();
@@ -75,20 +77,24 @@ export default function Post({ }: Props) {
   return (
     <UserLayout title={`New Post`}>
       <Toaster />
-        <div className="mx-auto max-w-3xl">
-          <div className="py-4 flex flex-col items-left space-y-2 mx-auto max-w-3xl">
-            <Label className="uppercase" htmlFor="title">Title</Label>
-            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-          </div>
-          <MarkdownEditor onChangeText={setMarkdown} value={content} />
-          <div className="py-4 flex flex-row items-center space-x-2">
-            <Label className="uppercase" htmlFor="published">Published</Label>
-          <Switch id="published" checked={published} onCheckedChange={() => setPublished(!published)} />
-          </div>
-          <div className="py-4">
-            <Button onClick={handleSave}>Save</Button>
-          </div>
+      <div className="mx-auto max-w-4xl">
+        <div className="py-4 flex flex-col items-left space-y-2 mx-auto max-w-4xl">
+          <Label className="uppercase" htmlFor="title">Title</Label>
+          <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
+        <div className="py-4 flex flex-col items-left space-y-2 mx-auto max-w-4xl">
+          <Label className="uppercase" htmlFor="title">Image Url</Label>
+          <Input id="title" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+        </div>
+        <MarkdownEditor onChangeText={setMarkdown} value={content} />
+        <div className="py-4 flex flex-row items-center space-x-2">
+          <Label className="uppercase" htmlFor="published">Published</Label>
+          <Switch id="published" checked={published} onCheckedChange={() => setPublished(!published)} />
+        </div>
+        <div className="py-4">
+          <Button onClick={handleSave}>Save</Button>
+        </div>
+      </div>
     </UserLayout>
   );
 }
