@@ -42,6 +42,14 @@ export default function Post({ }: Props) {
     fetchData();
   }, [postId]);
 
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      handleSave();
+    }, 1000);
+
+    return () => clearTimeout(delay);
+  }, [title, subtitle, markdown, published, imageUrl]);
+
   const handleSave = async () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${postId}`, {
@@ -55,10 +63,6 @@ export default function Post({ }: Props) {
 
       await response.json();
 
-      toast({
-        title: "Post saved",
-        description: "Your post has been saved successfully",
-      })
     } catch (error) {
       console.error('Error saving post:', error);
     }
@@ -67,6 +71,16 @@ export default function Post({ }: Props) {
   return (
     <UserLayout classNameContent="bg-white" title={`New Post`} hideHeader>
       <Toaster />
+      <header className="flex flex-row justify-between">
+        <div id="left-side">
+        </div>
+        <div id="right-side" className="flex flex-row items-center space-x-4">
+          <div className="py-2 flex flex-row items-center space-x-2">
+            <Switch id="published" checked={published} onCheckedChange={() => setPublished(!published)} />
+            <Label className="uppercase" htmlFor="published">{published ? "Published" : "Draft"}</Label>
+          </div>
+        </div>
+      </header>
       <div className="p-4 max-w-3xl mx-auto space-y-4">
         <Input
           className="text-4xl font-bold border-none focus:ring-0"
@@ -80,11 +94,6 @@ export default function Post({ }: Props) {
           value={subtitle}
           onChange={(e) => setSubtitle(e.target.value)}
         />
-        <div className="py-2 flex flex-row items-center space-x-2">
-          <Switch id="published" checked={published} onCheckedChange={() => setPublished(!published)} />
-          <Label className="uppercase" htmlFor="published">Published</Label>
-        </div>
-
         <MarkdownEditor onChangeText={setMarkdown} value={content} />
 
         <div className="p-4 border rounded-lg bg-gray-50 overflow-auto">
@@ -93,7 +102,6 @@ export default function Post({ }: Props) {
         </div>
 
         <div className="py-4">
-          <Button onClick={handleSave}>Save</Button>
         </div>
 
       </div>
