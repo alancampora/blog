@@ -1,11 +1,3 @@
-import {
-  Home,
-  SquareChevronRight,
-  User,
-  Settings,
-  Bell,
-  LogOut,
-} from "lucide-react"; // Icons
 import HomeIcon from "./icons/home";
 import { Link, useNavigate } from "react-router";
 import { Skeleton } from "./ui/skeleton";
@@ -13,7 +5,7 @@ import ProfileIcon from "./icons/profile";
 import ShutDownIcon from "./icons/shut-down";
 import { useAuth } from "@/context/auth";
 import UserIcon from "./icons/user";
-
+import BUserIcon from "./icons/b-user";
 const navItems = [
   {
     icon: HomeIcon,
@@ -24,6 +16,12 @@ const navItems = [
     icon: UserIcon,
     label: "Profile",
     link: "/profile",
+    onClick: null,
+  },
+  {
+    icon: BUserIcon,
+    label: "Blogs",
+    link: "/blogs",
     onClick: null,
   },
   {

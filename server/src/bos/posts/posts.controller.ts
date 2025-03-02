@@ -4,12 +4,10 @@ import { IUser } from "@common/User";
 import Post from "./posts.model";
 import mongoose from "mongoose";
 
-// Tipo extendido para la request con usuario autenticado
 interface AuthRequest extends Request {
   user?: IUser;
 }
 
-// Crear un nuevo post
 export const createPost = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const { title, content, published, imageUrl } = req.body;
@@ -29,7 +27,6 @@ export const createPost = async (req: AuthRequest, res: Response): Promise<void>
   }
 };
 
-// Obtener todos los posts
 export const getAllPosts = async (req: Request, res: Response): Promise<void> => {
   try {
     const posts = await Post.find().populate("userId", "username email");
@@ -39,7 +36,6 @@ export const getAllPosts = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
-// Obtener un post por ID
 export const getPostById = async (req: Request, res: Response): Promise<void> => {
   try {
     const post = await Post.findById(req.params.id).populate("userId", "username email");
@@ -55,7 +51,6 @@ export const getPostById = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
-// Actualizar un post
 export const updatePost = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     console.log('req.body, va a hacer el update', req.body); 
@@ -87,7 +82,6 @@ export const updatePost = async (req: AuthRequest, res: Response): Promise<void>
   }
 };
 
-// Eliminar un post
 export const deletePost = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const post = await Post.findById(req.params.id);

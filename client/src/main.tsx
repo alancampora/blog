@@ -51,7 +51,7 @@ const router = createBrowserRouter([
     element: <Singup />,
   },
   {
-    path: "/posts/:postId",
+    path: "/posts/edit/:postId",
     element: (
       <ProtectedRoute>
         <NewPost />
