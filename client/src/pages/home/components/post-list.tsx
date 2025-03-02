@@ -3,8 +3,9 @@ import PostItem from "./post-item";
 import PostFilters from "./post-filters";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {  Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { AlertDialog, AlertDialogCancel, AlertDialogAction, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogFooter, AlertDialogDescription } from "@/components/ui/alert-dialog";
+import { useAuth } from "@/context/auth";
 
 interface IPost {
   _id: string;
@@ -23,11 +24,15 @@ const PostList = ({ onNewPost }: PostListProps) => {
   const [activeFilter, setActiveFilter] = useState("Published");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [postToDelete, setPostToDelete] = useState<IPost | null>(null);
+  const {user} = useAuth();
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/posts`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/posts/user`,
+          { credentials: "include" }
+        );
         const data = await response.json();
         setPosts(data);
       } catch (error) {

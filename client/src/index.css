@@ -6,13 +6,19 @@
 
 body {
   font-family: "Inter", "Open Sans", Arial, sans-serif;
-  margin: 0;
-  justify-content: center; /* Centers content horizontally */
-  min-width: 320px;
-  min-height: 100vh;
 }
 
- .mdxeditor h1 {
+html, body, #root {
+  min-height: 100dvh; /* Ensures full viewport height */
+  margin: 0;
+  padding: 0;
+}
+
+#main-content{
+  height: 100dvh;
+}
+
+.mdxeditor h1 {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -34,20 +40,26 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 1rem;
-} 
+}
 
 :root {
   --main: #FFDC58;
-  --overlay: rgba(0, 0, 0, 0.8); /* background color overlay for alert dialogs, modals, etc. */
+  --secondary: #ffb158ad;
+  --overlay: rgba(0, 0, 0, 0.8);
+  /* background color overlay for alert dialogs, modals, etc. */
   --danger: #ff0800aa;
 
   --bg: #FEF2E8;
-  --bw: #fff; /* white and secondary black e.g. utility class variant would be: bg-[#fff] dark:bg-[#212121] */
-  --bs: #e5b9ff; /* white and secondary black e.g. utility class variant would be: bg-[#fff] dark:bg-[#212121] */
-  --blank: #000; /* blank black and white */
+  --bw: #fff;
+  /* white and secondary black e.g. utility class variant would be: bg-[#fff] dark:bg-[#212121] */
+  --bs: #e5b9ff;
+  /* white and secondary black e.g. utility class variant would be: bg-[#fff] dark:bg-[#212121] */
+  --blank: #000;
+  /* blank black and white */
   --border: #000;
   --text: #000;
-  --mtext: #000; /* text that is placed on background with main color e.g. text color of default button */
+  --mtext: #000;
+  /* text that is placed on background with main color e.g. text color of default button */
   --ring: #000;
   --ring-offset: #fff;
 
@@ -62,6 +74,39 @@ body {
   --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
 }
 
+.runtime-theme-colorfull {
+  --r-text: #230b04;
+  --r-background: #fefaf9;
+  --r-primary: #e85c2e;
+  --r-secondary: #87f2ac;
+  --r-accent: #4fe3eb;
+}
+
+.runtime-theme-fancy {
+  --r-text: #040c08;
+  --r-background: #f5fcf9;
+  --r-primary: #40c692;
+  --r-secondary: #de91c1;
+  --r-accent: #d4906c;
+}
+
+.runtime-theme-light {
+  --runtime-bg: var(--r-background);
+  --runtime-on-bg: var(--r-text);
+
+  --runtime-primary: var(--r-primary);
+  --runtime-primary-light: color-mix(in srgb, var(--r-primary) 10%, white); /* ✅ Correct */
+  --runtime-on-primary-bg: var(--r-text);
+
+  --runtime-accent: var(--r-accent);
+  --runtime-accent-light: color-mix(in srgb, var(--r-accent) 10%, white); /* ✅ Correct */
+  --runtime-on-accent-bg: var(--r-text);
+
+  --runtime-secondary: var(--r-secondary);
+  --runtime-secondary-light: color-mix(in srgb, var(--r-secondary) 10%, white); /* ✅ Correct */
+  --runtime-on-secondary-bg: var(--r-text);
+}
+
 .dark {
   --bg: #374151;
   --bw: #212121;
@@ -74,6 +119,3 @@ body {
 
   --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
 }
-
-
-

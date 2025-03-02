@@ -17,8 +17,17 @@ export default {
         border: 'var(--border)',
         ring: 'var(--ring)',
         ringOffset: 'var(--ring-offset)',
-
         secondaryBlack: '#212121',
+        runtimeNeutralBg: 'var(--runtime-neutral-bg)',
+        runtimeOnNeutralBg: 'var(--runtime-on-neutral-bg)',
+        runtimePrimaryBg: 'var(--runtime-primary-bg)',
+        runtimeOnPrimaryBg: 'var(--runtime-on-primary-bg)',
+        runtimePrimary: 'var(--runtime-primary)',
+        runtimePrimaryLight: 'var(--runtime-primary-light)',
+        runtimeSecondary: 'var(--runtime-secondary)',
+        runtimeSecondaryLight: 'var(--runtime-secondary-light)',
+        runtimeAccent: 'var(--runtime-accent)',
+        runtimeAccentLight: 'var(--runtime-accent-light)',
       },
       borderRadius: {
         base: '5px'

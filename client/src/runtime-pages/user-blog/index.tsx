@@ -18,13 +18,13 @@ export default function UserBlog({ }: Props) {
   }, [blogId]);
 
   return (
-    <div className="">
+    <div className="runtime-theme-fancy runtime-theme-light">
 
-      <div id="header" className="p-4">
-        <h1 className="text-xl font-bold uppercase">Bienvienid@s a mi blog</h1>
+      <div id="header" className="p-4 bg-runtimePrimary text-runtimeOnPrimaryBg">
+        <h1 className="text-xl font-bold uppercase text-center">Bienvienid@s a mi blog</h1>
       </div>
 
-      <div className="max-w-7xl mx-auto p-4">
+      <main id="main-content"className="p-4 bg-runtimeSecondary">
         <ul className="flex flex-wrap gap-4">
           {posts.map((post, index) => (
             <li key={index}>
@@ -34,7 +34,7 @@ export default function UserBlog({ }: Props) {
             </li>
           ))}
         </ul>
-      </div>
+      </main>
     </div>
   );
 }

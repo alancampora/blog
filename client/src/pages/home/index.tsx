@@ -31,7 +31,7 @@ export default function Home({ }: Props) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ title: "Untitled post", content: "this is the post" }),
-          credentials: "include", // Ensures the cookie is sent!
+          credentials: "include",
         });
 
       if (response.status === 403) {
@@ -46,7 +46,7 @@ export default function Home({ }: Props) {
 
       const post = await response.json();
 
-      navigate(`/posts/${post._id}`)
+      navigate(`/posts/edit/${post._id}`)
 
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unknown error");

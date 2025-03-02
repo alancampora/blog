@@ -16,7 +16,7 @@ export default function UserLayout({ title, subtitle, children, hideHeader = fal
   const { user, loading } = useAuth();
 
   return (
-    <div className={`flex flex-row h-full`}>
+    <div className={`flex flex-row 100-dvh`}>
       <VerticalNavbar isLoading={loading} />
 
       {user && (
