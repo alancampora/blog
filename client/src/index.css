@@ -90,6 +90,14 @@ html, body, #root {
   --r-accent: #d4906c;
 }
 
+.runtime-theme-cute {
+  --r-text: #0c070b;
+  --r-background: #faf6fa;
+  --r-primary: #a968a6;
+  --r-secondary: #cba4b0;
+  --r-accent: #be8d92;
+}
+
 .runtime-theme-light {
   --runtime-bg: var(--r-background);
   --runtime-on-bg: var(--r-text);

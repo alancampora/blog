@@ -5,6 +5,8 @@ export interface IConfig extends Document {
   active: boolean; // New field for active/inactive state
   userId: mongoose.Schema.Types.ObjectId; // Reference to User
   theme: string;
+  blogTitle: string;
+  _id: mongoose.Schema.Types.ObjectId;
   // Add other properties as needed
 }
 

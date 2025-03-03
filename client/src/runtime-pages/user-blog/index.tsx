@@ -8,6 +8,7 @@ type Props = {
   blogId: string | undefined;
   posts: Post[];
   theme: string | undefined;
+  blogTitle: string | undefined;
 };
 
 const usePosts = (blogId: string | undefined) => {
@@ -33,13 +34,13 @@ export function RuntimeUserBlog() {
   return (<UserBlog blogId={blogId} posts={posts} theme={runtimeConfig?.theme} />)
 }
 
-export default function UserBlog({ blogId, posts, theme }: Props) {
-
+export default function UserBlog({ blogId, posts, theme, blogTitle }: Props) {
+  console.log({ blogTitle });
   return (
     <>
       <div className={`runtime-theme-${theme} runtime-theme-light`}>
         <div id="header" className="p-4 bg-runtimePrimary text-runtimeOnPrimaryBg">
-          <h1 className="text-xl font-bold uppercase text-center">Bienvienid@s a mi blog</h1>
+          <h1 className="text-xl font-bold uppercase text-center">{blogTitle}</h1>
         </div>
         <main id="main-content" className="p-4 bg-runtimeSecondary">
           <ul className="flex flex-wrap gap-4">
