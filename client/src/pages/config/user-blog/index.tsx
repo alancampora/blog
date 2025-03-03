@@ -5,6 +5,7 @@ import UserBlog from "@/runtime-pages/user-blog";
 import { useEffect, useState } from "react";
 import { Config } from "@common/Config";
 import useConfig from "@/hooks/use-config";
+import WebBrowser from "@/components/web-broser";
 
 type Theme = string | undefined;
 type BlogTitle = string | undefined;
@@ -50,9 +51,11 @@ export default function ConfigUserBlog() {
       <AppSidebar
         onThemeSelected={handleThemeSelected} savedTheme={config?.theme}
         onBlogTitleChange={handleBlogTitleChange} savedBlogTitle={config?.blogTitle} />
-      <main>
+      <main className="w-full">
         <SidebarTrigger className="fixed top-2 left-2" />
-        <UserBlog blogId={"test"} posts={posts} theme={theme} blogTitle={blogTitle} />
+        <WebBrowser url={`${import.meta.env.VITE_DOMAIN}/${config?.blogName}`}>
+          <UserBlog blogId={"test"} posts={posts} theme={theme} blogTitle={blogTitle} />
+        </WebBrowser>
       </main>
     </SidebarProvider>
   )
