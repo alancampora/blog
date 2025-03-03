@@ -26,15 +26,15 @@ const usePosts = (blogId: string | undefined) => {
   return [posts];
 }
 
-export function RuntimeUserBlog() {
+export function RuntimeHome() {
   const { blogId } = useParams();
   const [posts] = usePosts(blogId);
   const [runtimeConfig] = useUserRuntimeConfig();
 
-  return (<UserBlog blogId={blogId} posts={posts} theme={runtimeConfig?.theme} />)
+  return (<RuntimeHomeComponent blogId={blogId} posts={posts} theme={runtimeConfig?.theme} blogTitle={runtimeConfig?.blogTitle} />)
 }
 
-export default function UserBlog({ blogId, posts, theme, blogTitle }: Props) {
+export default function RuntimeHomeComponent({ blogId, posts, theme, blogTitle }: Props) {
   console.log({ blogTitle });
   return (
     <>

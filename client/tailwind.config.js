@@ -6,6 +6,7 @@ export default {
   	extend: {
   		colors: {
   			main: 'var(--main)',
+  			accent: 'var(--accent)',
   			danger: 'var(--danger)',
   			overlay: 'var(--overlay)',
   			bg: 'var(--bg)',

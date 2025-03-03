@@ -1,10 +1,8 @@
 import { useAuth } from "@/context/auth";
 import VerticalNavbar from "./vertical-navbar";
-import RocketIcon from "./icons/rocket";
-import { useNavigate } from "react-router-dom";
 
 type Props = {
-  title: string;
+  title?: string;
   subtitle?: string;
   children: React.ReactNode;
   hideHeader?: boolean;

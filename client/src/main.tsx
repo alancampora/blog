@@ -11,9 +11,9 @@ import Landing from "./pages/landing/index.tsx";
 import Profile from "./pages/profile/index.tsx";
 import ProtectedRoute from "./components/protected-route.tsx";
 import NewPost from "./pages/posts/new/index.tsx";
-import { RuntimeUserBlog } from "./runtime-pages/user-blog/index.tsx";
+import { RuntimeHome } from "./runtime-pages/home/index.tsx";
 import RuntimePost from "./runtime-pages/post/index.tsx";
-import ConfigUserBlog from "./pages/config/user-blog/index.tsx";
+import ConfigUserBlog from "./pages/config/home/index.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/config/user-blog",
+    path: "/config/home",
     element: (
       <ProtectedRoute>
         <ConfigUserBlog />
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
   {
     path: "/:blogId",
     element: (
-      <RuntimeUserBlog />
+      <RuntimeHome />
     ),
   },
   {

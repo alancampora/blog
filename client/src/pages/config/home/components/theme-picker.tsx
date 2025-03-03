@@ -1,13 +1,6 @@
 import ThemeColorBar from "@/components/theme-color-bar"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarHeader,
-} from "@/components/ui/sidebar"
 import { useState, useEffect } from "react";
 
 const themes = [
@@ -44,8 +37,10 @@ interface AppSidebarProps {
   savedTheme: string | undefined;
   onBlogTitleChange: (blogTitle: string) => void;
   savedBlogTitle: string | undefined;
+  showEditPanel: boolean;
 }
-export function AppSidebar({ onThemeSelected, savedTheme, onBlogTitleChange, savedBlogTitle }: AppSidebarProps) {
+
+export function ThemePicker({ onThemeSelected, savedTheme, onBlogTitleChange, savedBlogTitle, showEditPanel }: AppSidebarProps) {
   const [selectedTheme, setSelectedTheme] = useState<string | undefined>(undefined);
   const [blogTitle, setBlogTitle] = useState<string | undefined>(undefined);
 
@@ -65,31 +60,31 @@ export function AppSidebar({ onThemeSelected, savedTheme, onBlogTitleChange, sav
   }
 
   return (
-    <Sidebar
-      variant="sidebar"
-      collapsible="offcanvas"
-      className="bg-main">
-      <SidebarHeader className="bg-bg">
-        <p className="text-xl font-bold text-center">
-          Customize your blog
-        </p>
-      </SidebarHeader>
-      <SidebarContent className="bg-bg">
-        <SidebarGroup>
-          <Label htmlFor="selectTheme">Select Theme Variant</Label>
-          <div id="selectTheme" className="my-2">
-            {themes.map(theme => (
-              <ThemeColorBar name={theme.name} colors={theme.colors} onSelected={() => handleThemeSelected(theme.name)} selected={selectedTheme === theme.name} />
-            ))}
-          </div>
-        </SidebarGroup>
-        <SidebarGroup>
-          <Label htmlFor="blogTitle">Blog Title</Label>
-          <Input className="my-2" id="blogTitle" type="text" value={blogTitle} onChange={(e) => handleBlogTitleChange(e.target.value)} />
-        </SidebarGroup>
-
-      </SidebarContent>
-      <SidebarFooter />
-    </Sidebar>
+    <div
+      className={`fixed bottom-0 right-0 left-0 w-full p-4 bg-main border-t-4 border-border 
+      shadow-lg transition-transform duration-300 ease-in-out
+      ${showEditPanel ? "translate-y-0 opacity-100 pointer-events-auto" : "translate-y-full opacity-0 pointer-events-none"}`}
+    >
+      <Label htmlFor="selectTheme">Select Theme Variant</Label>
+      <div id="selectTheme" className="my-2">
+        {themes.map((theme) => (
+          <ThemeColorBar
+            key={theme.name}
+            name={theme.name}
+            colors={theme.colors}
+            onSelected={() => handleThemeSelected(theme.name)}
+            selected={selectedTheme === theme.name}
+          />
+        ))}
+      </div>
+      <Label htmlFor="blogTitle">Blog Title</Label>
+      <Input
+        className="my-2"
+        id="blogTitle"
+        type="text"
+        value={blogTitle}
+        onChange={(e) => handleBlogTitleChange(e.target.value)}
+      />
+    </div>
   )
 }
