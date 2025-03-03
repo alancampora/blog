@@ -11,8 +11,9 @@ import Landing from "./pages/landing/index.tsx";
 import Profile from "./pages/profile/index.tsx";
 import ProtectedRoute from "./components/protected-route.tsx";
 import NewPost from "./pages/posts/new/index.tsx";
-import UserBlog from "./runtime-pages/user-blog/index.tsx";
+import { RuntimeUserBlog } from "./runtime-pages/user-blog/index.tsx";
 import RuntimePost from "./runtime-pages/post/index.tsx";
+import ConfigUserBlog from "./pages/config/user-blog/index.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Config />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/config/user-blog",
+    element: (
+      <ProtectedRoute>
+        <ConfigUserBlog />
       </ProtectedRoute>
     ),
   },
@@ -61,7 +70,7 @@ const router = createBrowserRouter([
   {
     path: "/:blogId",
     element: (
-      <UserBlog />
+      <RuntimeUserBlog />
     ),
   },
   {

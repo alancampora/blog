@@ -96,8 +96,6 @@ export default function BlogConfig({ }: Props) {
             <Switch id="airplane-mode" checked={active} onCheckedChange={() => setActive(!active)} />
           </div>
           <Button onClick={handleSave}>Save</Button>
-
-
         </CardContent>
       </Card>
     </UserLayout >

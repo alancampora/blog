@@ -12,7 +12,7 @@ export const updateOrCreateConfig = async (req: AuthRequest, res: Response): Pro
   console.log('updateOrCreateConfig');
 
   const { id } = req.params;
-  const { blogName, active } = req.body;
+  const { blogName, active, theme } = req.body;
   const userId = req.user?._id;
 
   console.log('updateOrCreateConfig', req.body);
@@ -30,7 +30,7 @@ export const updateOrCreateConfig = async (req: AuthRequest, res: Response): Pro
 
     let config = await Config.findOneAndUpdate(
       { userId },
-      { blogName, active },
+      { blogName, active, theme },
       { new: true, runValidators: true }
     );
 
@@ -45,6 +45,7 @@ export const updateOrCreateConfig = async (req: AuthRequest, res: Response): Pro
         _id: id,
         blogName,
         active,
+        theme: null,
         userId
       });
 
@@ -74,3 +75,21 @@ export const getConfig = async (req: AuthRequest, res: Response): Promise<void> 
     res.status(500).json({ message: 'Error fetching config', error: error.message });
   }
 };
+
+export const updateConfig = async (req: AuthRequest, res: Response): Promise<void> => {
+
+  const { id } = req.params;
+  const { blogName, active, theme } = req.body;
+  const userId = req.user?._id;
+
+  let config = await Config.findOneAndUpdate(
+    { userId, _id: id },
+    { blogName, active, theme },
+    { new: true, runValidators: true }
+  );
+
+  await config.save();
+
+  res.status(200).json(config); 
+
+}
