@@ -4,6 +4,7 @@ import { Post } from "@common/Post";
 import useUserRuntimeConfig from "@/hooks/user-runtime-config";
 import FreeLayout from "../components/free-layout";
 import BaseLayout from "../components/base-layout";
+import FormalTemplate from "../components/formal-template";
 
 
 type Props = {
@@ -37,12 +38,13 @@ export function RuntimeHome() {
 }
 
 export default function RuntimeHomeComponent({ blogId, posts, theme, blogTitle }: Props) {
-  const [layout] = useState<string>("base");
+  const [layout] = useState<string>("formal");
 
   return (
     <>
       {layout === "free" && <FreeLayout theme={theme} blogTitle={blogTitle} posts={posts} blogId={blogId} />}
       {layout === "base" && <BaseLayout theme={theme} blogTitle={blogTitle} posts={posts} blogId={blogId} />}
+      {layout === "formal" && <FormalTemplate theme={theme} blogTitle={blogTitle} />}
     </>
   );
 }

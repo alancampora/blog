@@ -97,6 +97,13 @@ html, body, #root {
   --r-accent: #be8d92;
 }
 
+.runtime-theme-formal {
+  --r-text: #0c070b;
+  --r-primary: #1a1a1a;
+  --r-secondary: #4a4a4a;
+  --r-accent: #0056b3;
+  --r-background: #ffffff;
+}
 .runtime-theme-light {
   --runtime-bg: var(--r-background);
   --runtime-on-bg: var(--r-text);

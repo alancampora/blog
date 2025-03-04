@@ -29,6 +29,16 @@ const themes = [
       { code: "#cba4b0", name: "secondary" },
       { code: "#be8d92", name: "accent" }
     ]
+  },
+  {
+    name: "formal",
+    colors: [
+      { code: "#0c070b", name: "text" },
+      { code: "#1a1a1a", name: "primary" },
+      { code: "#4a4a4a", name: "secondary" },
+      { code: "#0056b3", name: "accent" },
+      { code: "#ffffff", name: "background" }
+    ]
   }
 ]
 
