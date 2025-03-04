@@ -72,13 +72,13 @@ export default function ConfigHome() {
       <div className="flex flex-row">
         <main className="w-full">
           <div className="flex flex-row gap-2">
-            <Button className="bg-bs" onClick={() => {
+            <Button className="bg-main" onClick={() => {
               setShowEditPanel(!showEditPanel);
               setShowGeneralSettings(false);
             }}>
               Pick a theme
             </Button>
-            <Button className="bg-bs" onClick={() => {
+            <Button className="bg-main" onClick={() => {
               setShowGeneralSettings(!showGeneralSettings);
               setShowEditPanel(false);
             }}>
