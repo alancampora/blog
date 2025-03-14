@@ -8,13 +8,16 @@ import WebBrowser from "@/components/web-broser";
 import UserLayout from "@/components/user-layout";
 import { Button } from "@/components/ui/button";
 import { GeneralSettings } from "./components/general-settings";
+
 type Theme = string | undefined;
 type BlogTitle = string | undefined;
+type BlogDescription = string | undefined;
 
 const updateConfig = async (
   themeName: Theme,
   blogTitle: BlogTitle,
-  blogName: string,
+  blogDescription: BlogDescription,
+  handle: string | undefined,
   active: boolean | undefined,
   config: Config | null) => {
   if (!config) return;
@@ -25,7 +28,7 @@ const updateConfig = async (
       'Content-Type': 'application/json',
     },
     "credentials": "include",
-    body: JSON.stringify({ theme: themeName, blogTitle: blogTitle, blogName: blogName, active: active })
+    body: JSON.stringify({ theme: themeName, blogTitle, handle, active, blogDescription })
   });
 }
 
@@ -33,20 +36,26 @@ export default function ConfigHome() {
   const [posts] = useUserPosts();
   const [theme, setTheme] = useState<Theme>(undefined);
   const [blogTitle, setBlogTitle] = useState<BlogTitle>(undefined);
+  const [blogDescription, setBlogDescription] = useState<BlogDescription>(undefined);
   const [config] = useConfig();
   const [showEditPanel, setShowEditPanel] = useState(false);
   const [showGeneralSettings, setShowGeneralSettings] = useState(false);
-  const [blogName, setBlogName] = useState<string>(config?.blogName || "");
+  const [handle, setHandle] = useState<string | undefined>(config?.handle);
   const [active, setActive] = useState<boolean | undefined>(false);
 
   useEffect(() => {
-    updateConfig(theme, blogTitle, blogName, active, config);
-  }, [blogTitle, theme, blogName, active]);
+    // handle can't be empty
+    if (handle) {
+      updateConfig(theme, blogTitle, blogDescription, handle, active, config);
+    }
+
+  }, [blogTitle, theme, handle, active, blogDescription]);
 
   useEffect(() => {
     setTheme(config?.theme);
     setBlogTitle(config?.blogTitle);
-    setBlogName(config?.blogName || "");
+    setBlogDescription(config?.blogDescription)
+    setHandle(config?.handle);
     setActive(config?.active);
   }, [config]);
 
@@ -58,12 +67,16 @@ export default function ConfigHome() {
     setBlogTitle(blogTitle);
   }
 
-  const handleBlogNameChange = (blogName: string) => {
-    setBlogName(blogName);
+  const handleHandleChange = (handle: string) => {
+    setHandle(handle);
   }
 
   const handleActiveChange = (active: boolean) => {
     setActive(active);
+  }
+
+  const handleBlogDescriptionChange = (blogDescription: string) => {
+    setBlogDescription(blogDescription);
   }
 
   return (
@@ -85,19 +98,21 @@ export default function ConfigHome() {
               General Settings
             </Button>
           </div>
-          <WebBrowser url={`${import.meta.env.VITE_DOMAIN}/${config?.blogName}`}>
-            <UserBlog blogId={"test"} posts={posts} theme={theme} blogTitle={blogTitle} />
+          <WebBrowser url={`${import.meta.env.VITE_DOMAIN}/${config?.handle}`}>
+            <UserBlog blogId={"test"} posts={posts} theme={theme} blogTitle={blogTitle} blogDescription={blogDescription} />
           </WebBrowser>
         </main>
         <ThemePicker
           showEditPanel={showEditPanel}
           onThemeSelected={handleThemeSelected} savedTheme={theme}
-          onBlogTitleChange={handleBlogTitleChange} savedBlogTitle={blogTitle} />
+          onBlogTitleChange={handleBlogTitleChange} savedBlogTitle={blogTitle}
+          onBlogDescriptionChange={handleBlogDescriptionChange} savedBlogDescription={blogDescription}
+        />
         <GeneralSettings
           showGeneralSettings={showGeneralSettings}
-          savedBlogName={blogName}
+          savedHandle={handle}
           savedActive={active}
-          onBlogNameChange={handleBlogNameChange}
+          onHandleChange={handleHandleChange}
           onActiveChange={handleActiveChange} />
       </div>
     </UserLayout>

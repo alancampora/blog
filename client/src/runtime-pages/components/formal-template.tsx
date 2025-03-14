@@ -1,10 +1,13 @@
+import { Post } from "@common/Post";
 
 type Props = {
   theme?: string;
   blogTitle?: string;
+  posts?: Post[];
+  blogId?: string;
 };
 
-export default function FormalTemplate({ theme , blogTitle }: Props) {
+export default function FormalTemplate({ theme , blogTitle, posts, blogId  }: Props) {
   return (
     <div className={`runtime-theme-${theme} runtime-theme-light
     bg-runtimePrimaryBg min-h-screen text-runtimeOnPrimaryBg`}>
@@ -22,7 +25,7 @@ export default function FormalTemplate({ theme , blogTitle }: Props) {
 
       {/* Hero Section */}
       <section className="max-w-5xl mx-auto py-16 text-center">
-        <h2 className="text-4xl font-bold">Insights & Analysis for Professionals</h2>
+        <h2 className="text-4xl font-bold">{blogTitle}</h2>
         <p className="mt-4 text-runtimeSecondary">Delivering well-researched content for business leaders and professionals.</p>
       </section>
 
@@ -30,13 +33,13 @@ export default function FormalTemplate({ theme , blogTitle }: Props) {
       <section className="max-w-5xl mx-auto py-12">
         <h3 className="text-2xl font-semibold mb-6">Recent Articles</h3>
         <div className="space-y-6">
-          {[1, 2, 3].map((post) => (
+          {posts?.map((post) => (
             <div
-              key={post}
+              key={post.id}
               className="border border-runtimeSecondaryLight p-6 rounded-lg shadow-sm hover:shadow-md transition"
             >
-              <h4 className="text-xl font-medium">Understanding Market Trends</h4>
-              <p className="text-runtimeSecondary mt-2">A deep dive into how market trends are shaping industries.</p>
+              <h4 className="text-xl font-medium">{post.title}</h4>
+              <p className="text-runtimeSecondary mt-2">{post?.description}</p>
               <a href="#" className="text-runtimeAccent font-medium mt-3 block hover:text-runtimeAccentLight">
                 Read More
               </a>

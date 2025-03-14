@@ -47,17 +47,24 @@ interface AppSidebarProps {
   savedTheme: string | undefined;
   onBlogTitleChange: (blogTitle: string) => void;
   savedBlogTitle: string | undefined;
+  onBlogDescriptionChange: (blogDescription: string) => void;
+  savedBlogDescription: string | undefined;
   showEditPanel: boolean;
 }
 
-export function ThemePicker({ onThemeSelected, savedTheme, onBlogTitleChange, savedBlogTitle, showEditPanel }: AppSidebarProps) {
+export function ThemePicker({ onThemeSelected, savedTheme,
+  onBlogTitleChange, savedBlogTitle, showEditPanel,
+  savedBlogDescription, onBlogDescriptionChange,
+}: AppSidebarProps) {
   const [selectedTheme, setSelectedTheme] = useState<string | undefined>(undefined);
   const [blogTitle, setBlogTitle] = useState<string | undefined>(undefined);
+  const [blogDescription, setBlogDescription] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     setSelectedTheme(savedTheme);
     setBlogTitle(savedBlogTitle);
-  }, [savedTheme, savedBlogTitle]);
+    setBlogDescription(savedBlogDescription);
+  }, [savedTheme, savedBlogTitle, savedBlogDescription]);
 
   const handleThemeSelected = (theme: string) => {
     setSelectedTheme(theme);
@@ -67,6 +74,11 @@ export function ThemePicker({ onThemeSelected, savedTheme, onBlogTitleChange, sa
   const handleBlogTitleChange = (blogTitle: string) => {
     setBlogTitle(blogTitle);
     onBlogTitleChange(blogTitle);
+  }
+
+  const handleBlogDescriptionChange = (blogDescription: string) => {
+    setBlogDescription(blogDescription);
+    onBlogDescriptionChange(blogDescription);
   }
 
   return (
@@ -94,6 +106,14 @@ export function ThemePicker({ onThemeSelected, savedTheme, onBlogTitleChange, sa
         type="text"
         value={blogTitle}
         onChange={(e) => handleBlogTitleChange(e.target.value)}
+      />
+      <Label htmlFor="blogTitle">Blog Description</Label>
+      <Input
+        className="my-2"
+        id="blogDescription"
+        type="text"
+        value={blogDescription}
+        onChange={(e) => handleBlogDescriptionChange(e.target.value)}
       />
     </div>
   )

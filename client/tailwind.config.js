@@ -21,6 +21,8 @@ export default {
   			secondaryBlack: '#212121',
   			runtimeNeutralBg: 'var(--runtime-neutral-bg)',
   			runtimeOnNeutralBg: 'var(--runtime-on-neutral-bg)',
+        runtimeBackground: 'var(--runtime-background)',
+        runtimeOnBackground: 'var(--runtime-on-background)',
   			runtimePrimaryBg: 'var(--runtime-primary-bg)',
   			runtimeOnPrimaryBg: 'var(--runtime-on-primary-bg)',
   			runtimePrimary: 'var(--runtime-primary)',
@@ -28,6 +30,7 @@ export default {
   			runtimeSecondary: 'var(--runtime-secondary)',
   			runtimeSecondaryLight: 'var(--runtime-secondary-light)',
   			runtimeAccent: 'var(--runtime-accent)',
+  			runtimeOnAccent: 'var(--runtime-on-accent)',
   			runtimeAccentLight: 'var(--runtime-accent-light)',
   			sidebar: {
   				DEFAULT: 'hsl(var(--sidebar-background))',

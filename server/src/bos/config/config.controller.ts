@@ -12,25 +12,25 @@ export const updateOrCreateConfig = async (req: AuthRequest, res: Response): Pro
   console.log('updateOrCreateConfig');
 
   const { id } = req.params;
-  const { blogName, active, theme, blogTitle } = req.body;
+  const { handle, active, theme, blogTitle, blogDescription } = req.body;
   const userId = req.user?._id;
 
   console.log('updateOrCreateConfig', req.body);
 
   try {
-    let blogNameTakenByUser = await Config.findOne({ blogName });
+    let handleTakenByUser = await Config.findOne({ handle });
 
-    console.log('blogNameTakenByUser', blogNameTakenByUser);
+    console.log('handleTakenByUser', handleTakenByUser);
     console.log('userId', userId);
 
-    if (blogNameTakenByUser && blogNameTakenByUser.userId.toString() !== userId.toString()) {
-      res.status(400).json({ message: 'Blog name already taken' });
+    if (handleTakenByUser && handleTakenByUser.userId.toString() !== userId.toString()) {
+      res.status(400).json({ message: 'Handle already taken' });
       return;
     }
 
     let config = await Config.findOneAndUpdate(
       { userId },
-      { blogName, active, theme, blogTitle},
+      { handle, active, theme, blogTitle, blogDescription },
       { new: true, runValidators: true }
     );
 
@@ -43,10 +43,12 @@ export const updateOrCreateConfig = async (req: AuthRequest, res: Response): Pro
     if (!config) {
       config = new Config({
         _id: id,
-        blogName,
+        handle,
         active,
         theme: null,
-        userId
+        userId,
+        blogTitle,
+        blogDescription
       });
 
       await config.save();
@@ -81,12 +83,12 @@ export const getConfig = async (req: AuthRequest, res: Response): Promise<void> 
 export const updateConfig = async (req: AuthRequest, res: Response): Promise<void> => {
 
   const { id } = req.params;
-  const { blogName, active, theme, blogTitle } = req.body;
+  const { handle, active, theme, blogTitle, blogDescription } = req.body;
   const userId = req.user?._id;
 
   let config = await Config.findOneAndUpdate(
     { userId, _id: id },
-    { blogName, active, theme, blogTitle },
+    { handle, active, theme, blogTitle, blogDescription },
     { new: true, runValidators: true }
   );
 

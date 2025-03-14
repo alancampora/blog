@@ -97,28 +97,43 @@ html, body, #root {
   --r-accent: #be8d92;
 }
 
-.runtime-theme-formal {
+.runtime-theme-myTheme {
   --r-text: #0c070b;
-  --r-primary: #1a1a1a;
-  --r-secondary: #4a4a4a;
-  --r-accent: #0056b3;
-  --r-background: #ffffff;
+  --r-primary: #a968a6;
+  --r-secondary: #cba4b0;
+  --r-accent: #be8d92;
 }
+
+.runtime-theme-formal {
+  --r-background: #fef6e4 ;
+  --r-on-background: black
+
+  --r-secondary:  #f582ae;
+  --r-on-secondary: black;
+
+  --r-text: #172c66;
+
+  --r-primary: #f582ae;
+
+  --r-accent: #8bd3dd;
+  --r-on-accent: #cd004e;
+}
+
 .runtime-theme-light {
-  --runtime-bg: var(--r-background);
+  --runtime-background: var(--r-background);
   --runtime-on-bg: var(--r-text);
 
   --runtime-primary: var(--r-primary);
   --runtime-primary-light: color-mix(in srgb, var(--r-primary) 10%, white); /* ✅ Correct */
-  --runtime-on-primary-bg: var(--r-text);
+  --runtime-on-primary: var(--r-text);
 
   --runtime-accent: var(--r-accent);
   --runtime-accent-light: color-mix(in srgb, var(--r-accent) 10%, white); /* ✅ Correct */
-  --runtime-on-accent-bg: var(--r-text);
+  --runtime-on-accent: var(--r-on-accent);
 
   --runtime-secondary: var(--r-secondary);
   --runtime-secondary-light: color-mix(in srgb, var(--r-secondary) 10%, white); /* ✅ Correct */
-  --runtime-on-secondary-bg: var(--r-text);
+  --runtime-on-secondary: var(--r-on-secondary);
 }
 
 .dark {

@@ -9,6 +9,7 @@ export default function useConfig() {
 
   useEffect(() => {
     console.log({ user });
+
     const fetchConfig = async () => {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/config`, {
         method: 'GET',

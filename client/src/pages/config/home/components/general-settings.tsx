@@ -6,20 +6,20 @@ import { useState } from "react";
 
 interface GeneralSettings {
   showGeneralSettings: boolean;
-  savedBlogName: string;
+  savedHandle: string | undefined;
   savedActive?: boolean;
-  onBlogNameChange: (blogName: string) => void;
+  onHandleChange: (handle: string) => void;
   onActiveChange: (active: boolean) => void;
 }
 
-export function GeneralSettings({ showGeneralSettings, savedBlogName, savedActive, onBlogNameChange, onActiveChange }: GeneralSettings) {
-  const [blogName, setBlogName] = useState<string>(savedBlogName);
+export function GeneralSettings({ showGeneralSettings, savedHandle, savedActive, onHandleChange, onActiveChange }: GeneralSettings) {
+  const [handle, setHandle] = useState<string | undefined>(savedHandle);
   const [active, setActive] = useState<boolean | undefined>(savedActive);
 
   useEffect(() => {
-    setBlogName(savedBlogName);
-    setActive(savedActive || false);
-  }, [savedBlogName, savedActive]);
+    setHandle(savedHandle);
+    setActive(savedActive);
+  }, [savedHandle, savedActive]);
 
   return (
     <div
@@ -29,11 +29,11 @@ export function GeneralSettings({ showGeneralSettings, savedBlogName, savedActiv
     >
       <h1 className="text-2xl font-bold">General Settings</h1>
       <div className="my-4">
-        <Label htmlFor="blogName">BLOG NAME</Label>
+        <Label htmlFor="handle">Blog Handle</Label>
         <Input
-          id="blogName"
-          value={blogName}
-          onChange={(e) => onBlogNameChange(e.target.value)}
+          id="handle"
+          value={handle}
+          onChange={(e) => onHandleChange(e.target.value)}
         />
       </div>
       <div className="flex flex-row items-center gap-2 my-4">

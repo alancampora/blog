@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function BlogConfig({ }: Props) {
-  const [blogName, setBlogName] = useState("choose-a-name");
+  const [handle, setHandle] = useState("choose-a-name");
   const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
   const { toast } = useToast();
@@ -32,7 +32,7 @@ export default function BlogConfig({ }: Props) {
         }
 
         const data = await response.json();
-        setBlogName(data.blogName);
+        setHandle(data.handle);
         setActive(data.active);
         setId(data.id);
       } catch (error) {
@@ -53,7 +53,7 @@ export default function BlogConfig({ }: Props) {
             'Content-Type': 'application/json',
           },
           "credentials": "include",
-          body: JSON.stringify({ blogName, active, id }),
+          body: JSON.stringify({ handle, active, id }),
         });
 
       if (!response.ok) {
@@ -84,11 +84,11 @@ export default function BlogConfig({ }: Props) {
       <Card className="bg-bs">
         <CardContent>
           <div className="my-4">
-            <Label htmlFor="blogName">BLOG NAME</Label>
+            <Label htmlFor="handle">Blog Handle</Label>
             <Input
-              id="blogName"
-              value={blogName}
-              onChange={(e) => setBlogName(e.target.value)}
+              id="handle"
+              value={handle}
+              onChange={(e) => setHandle(e.target.value)}
             />
           </div>
           <div className="flex flex-row items-center gap-2 my-4">

@@ -2,18 +2,18 @@ import { Request, Response } from "express";
 import Config from "../config/config.model"; // Ensure you have the correct path to your Config model
 import Post from "../posts/posts.model"; // Ensure you have the correct path to your Post model
 
-// Obtener posts de un usuario específico por blogName
-export const getPostsByBlogName = async (req: Request, res: Response): Promise<void> => {
+export const getPostsByHandle = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { blogName } = req.params;
+    const { handle } = req.params;
 
-    if (!blogName) {
-      res.status(400).json({ message: "El nombre del blog es obligatorio" });
+    console.log('handle', handle);
+
+    if (!handle) {
+      res.status(400).json({ message: "The blog handle is required" });
       return;
     }
 
-    // Get user ID from Config model using blogName
-    const config = await Config.findOne({ blogName });
+    const config = await Config.findOne({ handle });
 
     if (!config) {
       res.status(404).json({ message: "No se encontró el usuario para el nombre del blog proporcionado" });

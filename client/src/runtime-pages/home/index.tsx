@@ -5,6 +5,7 @@ import useUserRuntimeConfig from "@/hooks/user-runtime-config";
 import FreeLayout from "../components/free-layout";
 import BaseLayout from "../components/base-layout";
 import FormalTemplate from "../components/formal-template";
+import MyTheme from "../components/my-theme";
 
 
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
   posts: Post[];
   theme: string | undefined;
   blogTitle: string | undefined;
+  blogDescription: string | undefined;
 };
 
 const usePosts = (blogId: string | undefined) => {
@@ -37,14 +39,15 @@ export function RuntimeHome() {
   return (<RuntimeHomeComponent blogId={blogId} posts={posts} theme={runtimeConfig?.theme} blogTitle={runtimeConfig?.blogTitle} />)
 }
 
-export default function RuntimeHomeComponent({ blogId, posts, theme, blogTitle }: Props) {
-  const [layout] = useState<string>("formal");
+export default function RuntimeHomeComponent({ blogId, posts, theme, blogTitle, blogDescription }: Props) {
+  const [layout] = useState<string>("pop");
 
   return (
     <>
       {layout === "free" && <FreeLayout theme={theme} blogTitle={blogTitle} posts={posts} blogId={blogId} />}
       {layout === "base" && <BaseLayout theme={theme} blogTitle={blogTitle} posts={posts} blogId={blogId} />}
-      {layout === "formal" && <FormalTemplate theme={theme} blogTitle={blogTitle} />}
+      {layout === "formal" && <FormalTemplate theme={theme} blogTitle={blogTitle} posts={posts} blogId={blogId} />}
+      {layout === "pop" && <MyTheme theme={theme} blogTitle={blogTitle} posts={posts} blogId={blogId} blogDescription={blogDescription} />}
     </>
   );
 }

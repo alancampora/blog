@@ -30,7 +30,7 @@ router.post("/register", async (req: Request, res: Response<Error | IUser>) => {
 
     // Create new user
 
-    const newUser = new User({ email, password: hashedPassword, username, blogName: toKebabCase(username) });
+    const newUser = new User({ email, password: hashedPassword, username });
     await newUser.save();
 
     res.status(201).json({ message: "User registered successfully" });
