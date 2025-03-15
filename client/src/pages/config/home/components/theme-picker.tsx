@@ -1,4 +1,4 @@
-import ThemeColorBar from "@/components/theme-color-bar"
+import ThemeColor from "@/components/theme-color"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState, useEffect } from "react";
@@ -31,15 +31,14 @@ const themes = [
     ]
   },
   {
-    name: "formal",
+    name: "pop",
     colors: [
-      { code: "#0c070b", name: "text" },
-      { code: "#1a1a1a", name: "primary" },
-      { code: "#4a4a4a", name: "secondary" },
-      { code: "#0056b3", name: "accent" },
-      { code: "#ffffff", name: "background" }
+      { code: "#fef6e4", name: "bg" },
+      { code: "#f582ae", name: "primary" },
+      { code: "#8bd3dd", name: "secondary" },
+      { code: "#cd004e", name: "accent" }
     ]
-  }
+  },
 ]
 
 interface AppSidebarProps {
@@ -88,9 +87,9 @@ export function ThemePicker({ onThemeSelected, savedTheme,
       ${showEditPanel ? "translate-y-0 opacity-100 pointer-events-auto" : "translate-y-full opacity-0 pointer-events-none"}`}
     >
       <Label htmlFor="selectTheme">Select Theme Variant</Label>
-      <div id="selectTheme" className="my-2">
+      <div id="selectTheme" className="my-2 flex flex-row justify-center items-center gap-4 flex-wrap">
         {themes.map((theme) => (
-          <ThemeColorBar
+          <ThemeColor
             key={theme.name}
             name={theme.name}
             colors={theme.colors}

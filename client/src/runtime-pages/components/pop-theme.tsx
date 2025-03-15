@@ -8,7 +8,7 @@ type Props = {
   blogDescription?: string;
   blogId?: string;
 };
-export default function Home({ theme, blogTitle, posts, blogDescription, blogId }: Props) {
+export default function PopTheme({ theme, blogTitle, posts, blogDescription, blogId }: Props) {
   return (
     <>
       <div className={`

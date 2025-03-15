@@ -5,7 +5,7 @@ import useUserRuntimeConfig from "@/hooks/user-runtime-config";
 import FreeLayout from "../components/free-layout";
 import BaseLayout from "../components/base-layout";
 import FormalTemplate from "../components/formal-template";
-import MyTheme from "../components/my-theme";
+import PopTheme from "../components/pop-theme";
 
 
 type Props = {
@@ -47,7 +47,7 @@ export default function RuntimeHomeComponent({ blogId, posts, theme, blogTitle, 
       {layout === "free" && <FreeLayout theme={theme} blogTitle={blogTitle} posts={posts} blogId={blogId} />}
       {layout === "base" && <BaseLayout theme={theme} blogTitle={blogTitle} posts={posts} blogId={blogId} />}
       {layout === "formal" && <FormalTemplate theme={theme} blogTitle={blogTitle} posts={posts} blogId={blogId} />}
-      {layout === "pop" && <MyTheme theme={theme} blogTitle={blogTitle} posts={posts} blogId={blogId} blogDescription={blogDescription} />}
+      {layout === "pop" && <PopTheme theme={theme} blogTitle={blogTitle} posts={posts} blogId={blogId} blogDescription={blogDescription} />}
     </>
   );
 }
